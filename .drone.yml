@@ -19,6 +19,7 @@ pipeline:
       - echo $MY_SECRET
       - make fmt-check
       - make test
+      - abcdefg fail on purpose
 
   scp_dev:
     image: appleboy/drone-scp
@@ -33,6 +34,7 @@ pipeline:
         - ./
     when:
       branch: develop
+      status: success
 
   # facebook:
   #   image: appleboy/drone-facebook
