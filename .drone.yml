@@ -30,7 +30,7 @@ pipeline:
         target: scp_password
     target: /home/drone/drone-test-by-Ken/${DRONE_REPO}
     source:
-        - Makefile
+        - ./
 
   # facebook:
   #   image: appleboy/drone-facebook
