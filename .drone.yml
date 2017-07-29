@@ -13,17 +13,29 @@ pipeline:
     image: golang
     pull: true
     secrets:
-      - source: appleboy
-        target: appleboy_target
+      - source: test_secret
+        target: my_secret
     commands:
-      - echo $APPLEBOY_TARGET
+      - echo $MY_SECRET
       - make fmt-check
       - make test
 
-  facebook:
-    image: appleboy/drone-facebook
-    secrets: [ fb_page_token, fb_verify_token ]
-    pull: true
-    to: 1234973386524610
-    when:
-      status: [ changed, failure ]
+  scp_dev:
+    image: appleboy/drone-scp
+    host: 139.59.123.108
+    port: 22
+    username: drone
+    secrets:
+      - source: drone_test_password
+        target: scp_password
+    target: /home/drone/drone-test-by-Ken/${DRONE_REPO}
+    source:
+        - Makefile
+
+  # facebook:
+  #   image: appleboy/drone-facebook
+  #   secrets: [ fb_page_token, fb_verify_token ]
+  #   pull: true
+  #   to: 1234973386524610
+  #   when:
+  #     status: [ changed, failure ]
