@@ -31,6 +31,8 @@ pipeline:
     target: /home/drone/drone-test-by-Ken/${DRONE_REPO}
     source:
         - ./
+    when:
+      branch: develop
 
   # facebook:
   #   image: appleboy/drone-facebook
